@@ -21,9 +21,11 @@ public class PriceService {
     public List<Price> mergePrice(List<Price> oldPrice, List<Price> newPrice){
 
         Map<String, List<Price>> priceGroupByProductCodeAndNumberAndDepart = new TreeMap<>();
-
+        //Добавляем в Map группировку по Product code, number, depart, так как про сортировку ничего не было написано,
+        // а в примере есть сортировка, то использую TreeMap
         priceUtils.saveAll(oldPrice, priceGroupByProductCodeAndNumberAndDepart);
         priceUtils.saveAll(newPrice, priceGroupByProductCodeAndNumberAndDepart);
+
         priceUtils.mergePricesInList(priceGroupByProductCodeAndNumberAndDepart);
 
         return priceUtils.convertToPriceList(priceGroupByProductCodeAndNumberAndDepart);

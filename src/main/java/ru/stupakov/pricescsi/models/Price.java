@@ -26,4 +26,20 @@ public class Price {
         this.dateEnd = price.getDateEnd();
         this.value = price.getValue();
     }
-}
+
+    public boolean checkSameValuesToMerge(Price secondPrice){
+        return this.value.equals(secondPrice.getValue())
+                && this.dateEnd.plusNanos(1).isBefore(secondPrice.getDateEnd().minusNanos(1))
+                && this.dateEnd.minusNanos(1).isAfter((secondPrice.getDateBegin().plusNanos(1)));
+    }
+
+    public boolean checkNotSameValuesNeedToAddNew(Price secondPrice){
+        return this.dateEnd.minusNanos(1).isAfter(secondPrice.getDateEnd().plusNanos(1))
+                && this.dateEnd.minusNanos(1).isAfter((secondPrice.getDateBegin().plusNanos(1)));
+    }
+
+    public boolean checkNotSameValuesNotNeedToAddNew(Price secondPrice){
+        return this.dateEnd.plusNanos(1).isBefore(secondPrice.getDateEnd().minusNanos(1))
+                && this.dateEnd.minusNanos(1).isAfter((secondPrice.getDateBegin().plusNanos(1)));
+    }
+};
