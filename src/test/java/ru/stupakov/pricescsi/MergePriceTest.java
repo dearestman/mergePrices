@@ -66,6 +66,80 @@ class MergePriceTest {
         assertEquals(resultPrice, priceService.mergePrice(oldPrice, newPrice));
     }
 
+    @Test
+    void testMergeWithNullValueInOldPrice(){
+        ArrayList<Price> oldPrice = new ArrayList<>();
+        ArrayList<Price> newPrice = new ArrayList<>(Collections.singletonList(
+                new Price(
+                        new Price(
+                                "1",
+                                1,
+                                1,
+                                PriceDateFormatter.formatUserDateToLocalDateTime("01.01.2013 00:00:00"),
+                                PriceDateFormatter.formatUserDateToLocalDateTime("31.01.2013 23:59:59"),
+                                11000L
+                        ))
+        )
+        );
+
+        assertEquals(oldPrice, priceService.mergePrice(oldPrice, newPrice));
+    }
+
+
+    @Test
+    void testMergeWithNotSameValue(){
+        ArrayList<Price> oldPrice = new ArrayList<>(Arrays.asList(
+                new Price(
+                        new Price(
+                                "122856",
+                                1,
+                                1,
+                                PriceDateFormatter.formatUserDateToLocalDateTime("01.01.2013 00:00:00"),
+                                PriceDateFormatter.formatUserDateToLocalDateTime("31.01.2013 23:59:59"),
+                                9000L
+                        ))
+        )
+        );
+
+        ArrayList<Price> newPrice = new ArrayList<>(Collections.singletonList(
+                new Price(
+                        new Price(
+                                "122856",
+                                1,
+                                1,
+                                PriceDateFormatter.formatUserDateToLocalDateTime("04.01.2013 00:00:00"),
+                                PriceDateFormatter.formatUserDateToLocalDateTime("31.02.2013 23:59:59"),
+                                11000L
+                        ))
+        ));
+
+        ArrayList<Price> resultPrice = new ArrayList<>(Arrays.asList(
+                new Price(
+                        new Price(
+                                "122856",
+                                1,
+                                1,
+                                PriceDateFormatter.formatUserDateToLocalDateTime("01.01.2013 00:00:00"),
+                                PriceDateFormatter.formatUserDateToLocalDateTime("04.01.2013 00:00:00"),
+                                9000L
+                        )),
+                new Price(
+                        new Price(
+                                "122856",
+                                1,
+                                1,
+                                PriceDateFormatter.formatUserDateToLocalDateTime("04.01.2013 00:00:00"),
+                                PriceDateFormatter.formatUserDateToLocalDateTime("31.02.2013 23:59:59"),
+                                11000L
+                        ))
+        ));
+
+        assertEquals(resultPrice, priceService.mergePrice(oldPrice, newPrice));
+    }
+
+
+
+
 
     @Test
     void mainTestByTask() {
@@ -193,6 +267,5 @@ class MergePriceTest {
                 ));
 
         assertEquals(resultPrice, priceService.mergePrice(oldPrice, newPrice));
-//        assertEquals(resultPrice, priceService.mergePrice(oldPrice, newPrice));
     }
 }
