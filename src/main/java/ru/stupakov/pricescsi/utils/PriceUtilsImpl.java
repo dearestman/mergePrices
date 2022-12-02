@@ -1,6 +1,5 @@
 package ru.stupakov.pricescsi.utils;
 
-import org.springframework.stereotype.Component;
 import ru.stupakov.pricescsi.models.Price;
 
 import java.util.*;
@@ -9,7 +8,6 @@ import java.util.stream.Collectors;
 /**
  * @author Stupakov D. L.
  **/
-@Component
 public class PriceUtilsImpl implements PriceUtils {
 
     @Override

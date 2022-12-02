@@ -1,13 +1,19 @@
 package ru.stupakov.pricescsi;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import lombok.RequiredArgsConstructor;
+import ru.stupakov.pricescsi.services.AppService;
 
-@SpringBootApplication
+import java.io.IOException;
+
+@RequiredArgsConstructor
 public class PricesCsiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PricesCsiApplication.class, args);
+
+
+	public static void main(String[] args) throws IOException {
+		AppService.startApp();
 	}
 
 }
+
+

@@ -1,12 +1,10 @@
 package ru.stupakov.pricescsi;
 
-import org.junit.jupiter.api.AfterEach;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import ru.stupakov.pricescsi.models.Price;
 import ru.stupakov.pricescsi.services.PriceService;
-import ru.stupakov.pricescsi.utils.PriceDateFormatter;
+import ru.stupakov.pricescsi.utils.formatters.PriceDateFormatter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,10 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Stupakov D. L.
  **/
-@SpringBootTest
+@AllArgsConstructor
 class MergePriceTest {
 
-    @Autowired
     private PriceService priceService;
 
 

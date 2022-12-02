@@ -2,6 +2,7 @@ package ru.stupakov.pricescsi.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import ru.stupakov.pricescsi.utils.formatters.PriceDateFormatter;
 
 import java.time.LocalDateTime;
 
@@ -27,6 +28,17 @@ public class Price {
         this.value = price.getValue();
     }
 
+    public String priceToCSV(){
+        return new StringBuilder()
+                .append(productCode).append(",")
+                .append(number).append(",")
+                .append(depart).append(",")
+                .append(PriceDateFormatter.formatLocalDateTimeToUserDate(dateBegin)).append(",")
+                .append(PriceDateFormatter.formatLocalDateTimeToUserDate(dateEnd)).append(",")
+                .append(value)
+                .append("\n").toString();
+    }
+
     public boolean checkSameValuesToMerge(Price secondPrice){
         return this.value.equals(secondPrice.getValue())
                 && this.dateEnd.plusNanos(1).isBefore(secondPrice.getDateEnd().minusNanos(1))
@@ -42,4 +54,6 @@ public class Price {
         return this.dateEnd.plusNanos(1).isBefore(secondPrice.getDateEnd().minusNanos(1))
                 && this.dateEnd.minusNanos(1).isAfter((secondPrice.getDateBegin().plusNanos(1)));
     }
+
+
 };

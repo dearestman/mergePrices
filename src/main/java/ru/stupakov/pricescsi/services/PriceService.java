@@ -1,7 +1,6 @@
 package ru.stupakov.pricescsi.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import ru.stupakov.pricescsi.models.Price;
 import ru.stupakov.pricescsi.utils.PriceUtilsImpl;
 
@@ -12,7 +11,6 @@ import java.util.TreeMap;
 /**
  * @author Stupakov D. L.
  **/
-@Service
 @RequiredArgsConstructor
 public class PriceService {
 
